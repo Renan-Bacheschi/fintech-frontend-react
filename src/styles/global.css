@@ -2,10 +2,52 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
-  background-color: #1b6329;
-  color: #333;
+  background-color: #0f3d3e; /* verde base 1 */
+  color: #f5f5f5;
+}
+
+.container {
+  padding: 20px 40px;
+}
+
+.page {
+  margin-top: 30px;
+}
+
+h2 {
+  color: #2ecc71;
+  margin-bottom: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #2a9d8f;
+  border-radius: 4px;
+  background: #f8f8f8;
+}
+
+button {
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #21867a;
 }

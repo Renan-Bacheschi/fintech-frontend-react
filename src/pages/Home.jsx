@@ -1,16 +1,10 @@
-import React from 'react';
-import NavBar from '../components/NavBar';
-
-const Home = () => {
+function Home() {
   return (
-    <div>
-      <NavBar />
-      <h1>Dashboard Financeiro</h1>
-      <div className="dashboard">
-        {/* Add dashboard widgets and statistics here */}
-      </div>
+    <div className="page">
+      <h2>Dashboard Fintech</h2>
+      <p>Bem-vindo ao seu painel financeiro.</p>
     </div>
   );
-};
+}
 
 export default Home;
