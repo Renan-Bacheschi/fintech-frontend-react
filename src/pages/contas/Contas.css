@@ -1,0 +1,106 @@
+.contas-page {
+  color: #f1f1f1;
+  margin-top: 20px;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-criar {
+  background-color: #2a9d8f;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-criar:hover {
+  background-color: #21867a;
+}
+
+.tabela-contas {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #0f3d3e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabela-contas th,
+.tabela-contas td {
+  padding: 10px;
+  text-align: left;
+}
+
+.tabela-contas th {
+  background-color: #073b3a;
+}
+
+.tabela-contas tr:nth-child(even) {
+  background-color: #114d4c;
+}
+
+.btn-editar,
+.btn-excluir {
+  margin-right: 8px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background-color: #1e8449;
+}
+
+.btn-excluir {
+  background-color: #922b21;
+}
+
+.btn-editar:hover {
+  background-color: #27ae60;
+}
+
+.btn-excluir:hover {
+  background-color: #b03a2e;
+}
+
+.form-conta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.form-conta input {
+  padding: 8px;
+  border: 1px solid #2a9d8f;
+  border-radius: 5px;
+}
+
+.btn-salvar {
+  background-color: #2a9d8f;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-salvar:hover {
+  background-color: #21867a;
+}
+
+.erro {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+}
