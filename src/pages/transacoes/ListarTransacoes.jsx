@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api";
 import "./Transacoes.css";
 
 function ListarTransacoes() {
   const navigate = useNavigate();
+  const [transacoes, setTransacoes] = useState([]);
 
-  const [transacoes, setTransacoes] = useState([
-    { id: 1, descricao: "Depósito PIX", tipo: "ENTRADA", valor: 500.0, data: "2025-11-02" },
-    { id: 2, descricao: "Delivery", tipo: "SAÍDA", valor: 75.9, data: "2025-11-03" },
-    { id: 3, descricao: "Combustível", tipo: "SAÍDA", valor: 60.0, data: "2025-11-04" },
-  ]);
+  useEffect(() => {
+    carregarTransacoes();
+  }, []);
 
-  const excluirTransacao = (id) => {
+  const carregarTransacoes = async () => {
+    try {
+      const resposta = await api.get("/transacoes");
+      setTransacoes(resposta.data);
+    } catch (erro) {
+      console.error("Erro ao carregar transações:", erro);
+    }
+  };
+
+  const excluirTransacao = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir esta transação?")) {
-      setTransacoes(transacoes.filter((t) => t.id !== id));
+      await api.delete(`/transacoes/${id}`);
+      carregarTransacoes();
     }
   };
 

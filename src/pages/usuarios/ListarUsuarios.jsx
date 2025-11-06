@@ -1,19 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api";
 import "./Usuarios.css";
 
 function ListarUsuarios() {
   const navigate = useNavigate();
+  const [usuarios, setUsuarios] = useState([]);
 
-  const [usuarios, setUsuarios] = useState([
-    { id: 1, nome: "Renan", email: "renan@email.com" },
-    { id: 2, nome: "Maria", email: "maria@email.com" },
-    { id: 3, nome: "João", email: "joao@email.com" },
-  ]);
+  useEffect(() => {
+    carregarUsuarios();
+  }, []);
 
-  const excluirUsuario = (id) => {
+  const carregarUsuarios = async () => {
+    try {
+      const resposta = await api.get("/usuarios"); // busca no backend
+      setUsuarios(resposta.data);
+    } catch (erro) {
+      console.error("Erro ao carregar usuários:", erro);
+      alert("Erro ao carregar usuários. Verifique o backend.");
+    }
+  };
+
+  const excluirUsuario = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir este usuário?")) {
-      setUsuarios(usuarios.filter((u) => u.id !== id));
+      try {
+        await api.delete(`/usuarios/${id}`);
+        carregarUsuarios(); // recarrega após exclusão
+      } catch (erro) {
+        console.error("Erro ao excluir usuário:", erro);
+      }
     }
   };
 
@@ -40,8 +55,18 @@ function ListarUsuarios() {
               <td>{u.nome}</td>
               <td>{u.email}</td>
               <td>
-                <button className="btn-editar" onClick={() => navigate(`/usuarios/${u.id}/editar`)}>Editar</button>
-                <button className="btn-excluir" onClick={() => excluirUsuario(u.id)}>Excluir</button>
+                <button
+                  className="btn-editar"
+                  onClick={() => navigate(`/usuarios/${u.id}/editar`)}
+                >
+                  Editar
+                </button>
+                <button
+                  className="btn-excluir"
+                  onClick={() => excluirUsuario(u.id)}
+                >
+                  Excluir
+                </button>
               </td>
             </tr>
           ))}
