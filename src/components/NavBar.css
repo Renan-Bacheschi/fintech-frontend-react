@@ -29,3 +29,15 @@
 .nav-links a:hover {
   color: #2a9d8f; /*VERDE BASE 2*/
 }
+
+.nav-links button {
+  background: none;
+  border: none;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-links button:hover {
+  color: #2a9d8f;
+}
