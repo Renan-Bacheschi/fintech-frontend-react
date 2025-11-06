@@ -1,59 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import FormField from '../../components/FormField';
-import api from '../../../fintech-frontend-react/src/api/client';
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import "./Usuarios.css";
 
-const EditarUsuario = () => {
+function EditarUsuarios() {
   const { id } = useParams();
-  const [formData, setFormData] = useState({
-    nome: '',
-    email: ''
+  const navigate = useNavigate();
+
+  const [usuario, setUsuario] = useState({
+    nome: "Renan",
+    email: "renan@email.com",
+    senha: "",
   });
 
-  useEffect(() => {
-    const fetchUsuario = async () => {
-      try {
-        const response = await api.get(`/usuarios/${id}`);
-        setFormData(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar usuário:', error);
-      }
-    };
-
-    fetchUsuario();
-  }, [id]);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await api.put(`/usuarios/${id}`, formData);
-      // Add success handling
-    } catch (error) {
-      console.error('Erro ao atualizar usuário:', error);
-    }
+    alert(`Usuário ${id} atualizado (simulado)!`);
+    navigate("/usuarios");
   };
 
   return (
-    <div>
-      <h1>Editar Usuário</h1>
-      <form onSubmit={handleSubmit}>
-        <FormField
-          label="Nome"
-          name="nome"
-          value={formData.nome}
-          onChange={(e) => setFormData({...formData, nome: e.target.value})}
+    <div className="usuarios-page">
+      <h2>Editar Usuário</h2>
+
+      <form className="form-usuario" onSubmit={handleSubmit}>
+        <label>Nome:</label>
+        <input
+          value={usuario.nome}
+          onChange={(e) => setUsuario({ ...usuario, nome: e.target.value })}
         />
-        <FormField
-          label="Email"
+
+        <label>Email:</label>
+        <input
           type="email"
-          name="email"
-          value={formData.email}
-          onChange={(e) => setFormData({...formData, email: e.target.value})}
+          value={usuario.email}
+          onChange={(e) => setUsuario({ ...usuario, email: e.target.value })}
         />
-        <button type="submit">Atualizar</button>
+
+        <label>Senha:</label>
+        <input
+          type="password"
+          value={usuario.senha}
+          onChange={(e) => setUsuario({ ...usuario, senha: e.target.value })}
+        />
+
+        <button type="submit" className="btn-salvar">Salvar Alterações</button>
       </form>
     </div>
   );
-};
+}
 
-export default EditarUsuario;
+export default EditarUsuarios;

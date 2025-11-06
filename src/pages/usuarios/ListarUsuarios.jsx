@@ -1,31 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import Table from '../../components/Table';
-import api from '../../../fintech-frontend-react/src/api/client';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Usuarios.css";
 
-const ListarUsuarios = () => {
-  const [usuarios, setUsuarios] = useState([]);
+function ListarUsuarios() {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUsuarios = async () => {
-      try {
-        const response = await api.get('/usuarios');
-        setUsuarios(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar usuários:', error);
-      }
-    };
+  const [usuarios, setUsuarios] = useState([
+    { id: 1, nome: "Renan", email: "renan@email.com" },
+    { id: 2, nome: "Maria", email: "maria@email.com" },
+    { id: 3, nome: "João", email: "joao@email.com" },
+  ]);
 
-    fetchUsuarios();
-  }, []);
-
-  const headers = ['ID', 'Nome', 'Email', 'Ações'];
+  const excluirUsuario = (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este usuário?")) {
+      setUsuarios(usuarios.filter((u) => u.id !== id));
+    }
+  };
 
   return (
-    <div>
-      <h1>Usuários</h1>
-      <Table headers={headers} data={usuarios} />
+    <div className="usuarios-page">
+      <div className="topo">
+        <h2>Usuários</h2>
+        <button className="btn-criar" onClick={() => navigate("/usuarios/novo")}>
+          + Novo Usuário
+        </button>
+      </div>
+
+      <table className="tabela-usuarios">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuarios.map((u) => (
+            <tr key={u.id}>
+              <td>{u.nome}</td>
+              <td>{u.email}</td>
+              <td>
+                <button className="btn-editar" onClick={() => navigate(`/usuarios/${u.id}/editar`)}>Editar</button>
+                <button className="btn-excluir" onClick={() => excluirUsuario(u.id)}>Excluir</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-};
+}
 
 export default ListarUsuarios;

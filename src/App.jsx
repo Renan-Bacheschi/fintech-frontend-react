@@ -15,6 +15,11 @@ import ListarContas from "./pages/contas/ListarContas";
 import CriarContas from "./pages/contas/CriarContas";
 import EditarContas from "./pages/contas/EditarContas";
 
+// Usuáris
+import ListarUsuarios from "./pages/usuarios/ListarUsuarios";
+import CriarUsuarios from "./pages/usuarios/CriarUsuarios";
+import EditarUsuarios from "./pages/usuarios/EditarUsuarios";
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,7 +27,7 @@ function App() {
       <div className="container">
         <Routes>
 
-          {/* Página inicial (DASH) */}
+          {/* Página inicial (Dashboard) */}
           <Route
             path="/"
             element={
@@ -87,8 +92,35 @@ function App() {
             }
           />
 
+          {/* Usuários */}
+          <Route
+            path="/usuarios"
+            element={
+              <PrivateRoute>
+                <ListarUsuarios />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/usuarios/novo"
+            element={
+              <PrivateRoute>
+                <CriarUsuarios />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/usuarios/:id/editar"
+            element={
+              <PrivateRoute>
+                <EditarUsuarios />
+              </PrivateRoute>
+            }
+          />
+
           {/* Página não encontrada */}
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </div>
     </BrowserRouter>
